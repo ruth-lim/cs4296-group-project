@@ -1,28 +1,43 @@
+import json
+
 def lambda_handler(event, context):
-    task_type = event.get("type")
+    try:
+        # If coming from Function URL or API Gateway, parse the "body" field
+        if "body" in event:
+            body = json.loads(event["body"])
+        else:
+            body = event
 
-    if task_type == "rest_api":
-        name = event.get("name", "World")
-        return {
-            "statusCode": 200,
-            "body": f"Hello, {name}!"
-        }
+        task_type = body.get("type")
 
-    elif task_type == "database_query":
-        query_id = event.get("id", "1")
-        fake_database = {
-            "1": {"name": "Alice", "role": "Engineer"},
-            "2": {"name": "Bob", "role": "Designer"},
-            "3": {"name": "Charlie", "role": "Manager"}
-        }
-        result = fake_database.get(query_id, {"error": "Record not found"})
-        return {
-            "statusCode": 200,
-            "body": result
-        }
+        if task_type == "rest_api":
+            name = body.get("name", "World")
+            return {
+                "statusCode": 200,
+                "body": f"Hello, {name}!"
+            }
 
-    else:
+        elif task_type == "database_query":
+            query_id = body.get("id", "1")
+            fake_db = {
+                "1": {"name": "Alice", "role": "Engineer"},
+                "2": {"name": "Bob", "role": "Designer"},
+                "3": {"name": "Charlie", "role": "Manager"}
+            }
+            result = fake_db.get(query_id, {"error": "Record not found"})
+            return {
+                "statusCode": 200,
+                "body": result
+            }
+
+        else:
+            return {
+                "statusCode": 400,
+                "body": f"Invalid request type: {task_type}"
+            }
+
+    except Exception as e:
         return {
-            "statusCode": 400,
-            "body": "Invalid request type"
+            "statusCode": 500,
+            "body": f"Error parsing input: {str(e)}"
         }
