@@ -85,7 +85,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">results.csv</stringProp>
+          <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
@@ -122,7 +122,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">results.csv</stringProp>
+          <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report">
@@ -159,7 +159,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">results.csv</stringProp>
+          <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>
