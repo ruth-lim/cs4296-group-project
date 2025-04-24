@@ -1,0 +1,14 @@
+# FROM mcr.microsoft.com/azure-functions/python:3.9
+FROM python:3.9-slim
+
+# Set working directory
+WORKDIR /build
+
+# Install zip
+RUN apt-get update && apt-get install -y zip
+
+# Copy Azure Function
+COPY workloads/azure/function_app.py .
+
+# Create the zip
+RUN zip function.zip function_app.py

@@ -1,6 +1,6 @@
 import json
 
-def lambda_handler(request):
+def http_function(request):
     """HTTP Cloud Function.
     Args:
         request (flask.Request): The request object.
